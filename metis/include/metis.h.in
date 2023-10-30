@@ -30,8 +30,13 @@
  GCC does provides these definitions in stdint.h, but it may require some
  modifications on other architectures.
 --------------------------------------------------------------------------*/
-#define IDXTYPEWIDTH 32
 
+#cmakedefine METIS_I64
+#ifdef METIS_I64
+#define IDXTYPEWIDTH 64
+#else
+#define IDXTYPEWIDTH 32
+#endif
 
 /*--------------------------------------------------------------------------
  Specifies the data type that will hold floating-point style information.
@@ -40,7 +45,13 @@
    32 : single precission floating point (float)
    64 : double precission floating point (double)
 --------------------------------------------------------------------------*/
+
+#cmakedefine METIS_R64
+#ifdef METIS_R64
 #define REALTYPEWIDTH 64
+#else
+#define REALTYPEWIDTH 32
+#endif
 
 
 

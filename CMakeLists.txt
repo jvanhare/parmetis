@@ -1,12 +1,16 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 project(ParMETIS)
+
+option(METIS_I64 "Using long integer" OFF)
+option(METIS_R64 "Using double-precision floating-point" ON)
+
+find_package(MPI 3 COMPONENTS C)
 
 set(GKLIB_PATH ${CMAKE_CURRENT_SOURCE_DIR}/metis/GKlib)
 set(METIS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/metis)
-set(SHARED ${BUILD_SHARED_LIBS})
 
 # Prepare libraries.
-if(SHARED)
+if(BUILD_SHARED_LIBS)
   set(ParMETIS_LIBRARY_TYPE SHARED)
   # CMake RPATH "always full" configuration, see:
   # https://cmake.org/Wiki/CMake_RPATH_handling#Always_full_RPATH
@@ -33,7 +37,7 @@ include(${GKLIB_PATH}/GKlibSystem.cmake)
 # List of paths that the compiler will search for header files.
 # i.e., the -I equivalent
 include_directories(include)
-include_directories(${MPI_INCLUDE_PATH})
+include_directories(${MPI_C_INCLUDE_DIRS})
 include_directories(${GKLIB_PATH})
 include_directories(${METIS_PATH}/include)
 

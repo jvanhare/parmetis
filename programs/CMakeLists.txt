@@ -1,4 +1,5 @@
 include_directories(.)
+include_directories(${CMAKE_BINARY_DIR}/metis/include)
 # Create programs.
 add_executable(ptest ptest.c io.c adaptgraph.c)
 add_executable(mtest mtest.c io.c)
